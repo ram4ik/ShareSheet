@@ -9,8 +9,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isShareSheetShowing = false
+    
     var body: some View {
-        Text("Hello, World!")
+        Button(action: shareButton) {
+            Image(systemName: "square.and.arrow.up")
+                .font(.largeTitle)
+        }
+    }
+    
+    func shareButton() {
+        isShareSheetShowing.toggle()
+        
+        let url = URL(string: "https://apple.com")
+        let av = UIActivityViewController(activityItems: [url!], applicationActivities: nil)
+        
+        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
 }
 
